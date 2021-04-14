@@ -1,0 +1,175 @@
+@import "https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css";
+
+@font-face {
+  font-family: 'Glyphs';
+  src: url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.eot');
+  src: url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.woff') format('woff'), url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+
+.glyphicon {
+  font-family: 'Glyphs', sans-serif;
+}
+
+body {
+  padding-top: 5rem;
+}
+
+.dropdown-toggle{
+  background-color: #007CC7;
+}
+
+.dropdown-toggle:hover{
+  background-color: #4DA8DA;
+}
+
+.dropdown-toggle:focus{
+  background-color: #4DA8DA;
+}
+
+.logo-img{
+  height: 50px;
+  width: 100px;
+}
+
+.navbar-custom{
+  background-color: #12232E;
+  min-height: 80px;
+}
+
+.navbar-custom .navbar-brand{
+  color: white;
+}
+
+.nav-link{
+  color: white;
+}
+
+.content-wrapper{
+  min-width: 0;
+  width: 100%;
+}
+
+#sidebar-wrapper {
+  padding-top: 3vw;
+  background-color: white;
+  min-height: 100vh;
+  margin-left: -12vw;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+.sidebar-heading{
+  background-color: #12232E;
+  color: white;
+}
+
+.list-group-item{
+  background-color: #203647;
+  color: white;
+}
+
+.list-group-item:hover{
+  background-color: #007CC7;
+  color: white;
+}
+
+.product-image{
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card{
+  border: none;
+  outline: none;
+  background-color: #4DA8DA;
+  border-radius: 20px;
+}
+
+.card:hover{
+  transform: translateY(-15px);
+  transition: transform .3s;
+}
+
+.text1{
+  font-size: 13px;
+  color: black;
+}
+
+.info{
+  line-height: 17px;
+}
+
+.cost span{
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.defcard{
+  background: #007CC7;
+  opacity: .8;
+}
+
+.cursor{
+  cursor: pointer;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.input-group{
+  width: 150px;
+  margin: 40px auto;
+}
+
+.admin{
+  color: red;
+}
+
+.user{
+  color: green;
+}
+
+.detailsTitle{
+  text-align: right;
+  font-size: 1vw;
+}
+
+.detailsValue{
+  text-align: left;
+  font-size: 1vw;
+}
+
+.pagination{
+  margin-top: 25px;
+}
+
+.pagination a.prev{
+  background-color: #12232E;
+  color: white;
+}
+
+.pagination a.next{
+  background-color: #12232E;
+  color: white;
+}
+
+.pagination a.page{
+  background-color: #203647;
+  color: white;
+}
+
+.easyPaginateNav a {padding:5px;}
+.easyPaginateNav a.current {font-weight:bold;text-decoration:underline;}
