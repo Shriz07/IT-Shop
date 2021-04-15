@@ -10,6 +10,9 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
+
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -36,5 +39,16 @@ public class CartItemTest
         CartItem savedCartItem = cartItemRepository.save(cartItem);
 
         assertTrue(savedCartItem.getCartid() > 0);
+    }
+
+    @Test
+    public void testGetCartItemsByUser()
+    {
+        User user = new User();
+        user.setId(14);
+
+        List<CartItem> cartItems = cartItemRepository.findByUser(user);
+
+        assertEquals(2, cartItems.size());
     }
 }
