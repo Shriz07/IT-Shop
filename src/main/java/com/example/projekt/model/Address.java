@@ -24,6 +24,17 @@ public class Address
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "address")
     private Set<User> users = new HashSet<>();
 
+    public Address()
+    {}
+
+    public Address(String city, String postalCode, String street, String homeNumber)
+    {
+        this.city = city;
+        this.postalCode = postalCode;
+        this.street = street;
+        this.homeNumber = homeNumber;
+    }
+
     public Integer getAddressId() { return addressId; }
 
     public void setAddressId(Integer addressId) { this.addressId = addressId; }
