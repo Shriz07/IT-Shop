@@ -63,4 +63,10 @@ public class CartItem
     {
         this.quantity = quantity;
     }
+
+    @Transient
+    public float getSubtotal()
+    {
+        return this.product.getPrice() * quantity;
+    }
 }
