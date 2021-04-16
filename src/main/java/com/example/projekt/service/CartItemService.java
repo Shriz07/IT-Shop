@@ -1,21 +1,65 @@
 package com.example.projekt.service;
 
 import com.example.projekt.model.CartItem;
+import com.example.projekt.model.Product;
 import com.example.projekt.model.User;
 import com.example.projekt.repository.CartItemRepository;
+import com.example.projekt.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class CartItemService
 {
     @Autowired
     private CartItemRepository cartItemRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     public List<CartItem> listCartItems(User user)
     {
         return cartItemRepository.findByUser(user);
+    }
+
+    public Integer addProduct(Integer productId, Integer quantity, User user)
+    {
+        Integer addedQuantity = quantity;
+        Product product = productRepository.findById(productId).get();
+        CartItem cartItem = cartItemRepository.findByUserAndProduct(user, product);
+
+        if(cartItem != null)
+        {
+            addedQuantity = cartItem.getQuantity() + quantity;
+            cartItem.setQuantity(addedQuantity);
+        }
+        else
+        {
+            cartItem = new CartItem();
+            cartItem.setQuantity(quantity);
+            cartItem.setUser(user);
+            cartItem.setProduct(product);
+        }
+
+        cartItemRepository.save(cartItem);
+
+        return addedQuantity;
+    }
+
+    public float updateQuantity(Integer productId, Integer quantity, User user)
+    {
+        cartItemRepository.updateQuantity(quantity, productId, user.getId());
+        Product product = productRepository.findById(productId).get();
+        float subtotal = product.getPrice() * quantity;
+        return subtotal;
+    }
+
+    public void removeProduct(Integer productId, User user)
+    {
+        cartItemRepository.deleteByUserAndProduct(user.getId(), productId);
     }
 }
