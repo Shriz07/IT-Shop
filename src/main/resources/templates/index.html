@@ -71,7 +71,7 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" sec:authorize="isAuthenticated()" href="#">Shopping cart</a>
+                            <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="'/shoppingCart'">Shopping cart</a>
                             <a class="dropdown-item" th:href="@{/register}">Register</a>
                             <a class="dropdown-item" th:href="@{/login}">Login</a>
                             <a class="dropdown-item" sec:authorize="isAuthenticated()" href="#">My orders</a>
