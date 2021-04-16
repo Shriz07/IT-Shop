@@ -123,12 +123,12 @@
         <div class="row m-1">
             <div class="col-sm-8">
                 <th:block th:each="item, status : ${cartItems}">
-                    <div class="row cartItem" th:with="product = ${item.product}">
+                    <div class="row cartItem" th:with="product = ${item.product}" th:id="'row' + ${status.count}">
                         <div class="col-1">
                             <div>
                                 [[${status.count}]]
                             </div>
-                            <div><a class="fas fa-trash trashIcon" href="#"></a></div>
+                            <div><a class="fas fa-trash trashIcon link-remove" th:rowNumber="${status.count}" th:href="@{'/cart/remove/' + ${product.productId}}"></a></div>
                         </div>
                         <div class="col-3">
                             <img th:src="@{${'/product_images/' + product.image}}" class="img-fluid"/>
@@ -144,7 +144,7 @@
                                 <span>$[[${product.price}]]</span>
                             </div>
                             <div>
-                                <span class="h4"> [Subtotal] </span>
+                                <span class="h4">Subtotal $ </span><span th:id="subtotal + ${product.productId}" class="h4 productSubtotal">[[${item.subtotal}]] </span>
                             </div>
                         </div>
                     </div>
@@ -157,7 +157,7 @@
                     <span class="h3">Estimated total:</span>
                 </div>
                 <div class="mt-2">
-                    <span class="h2">[Total Amount]</span>
+                    <span class="h2" id="totalAmount"></span>
                 </div>
                 <div class="mt-2">
                     <button class="btn btn-success p-3 mt-2">Check Out</button>
@@ -172,7 +172,10 @@
     </div>
 
 </main><!-- /.container -->
-<script th:src="@{/js/quantity_controller.js}"></script>
-
+<script th:src="@{/js/shopping_cart.js}"></script>
+<script type="text/javascript">
+    var csrfHeaderName = "[[${_csrf.headerName}]]";
+    var csrfValue = "[[${_csrf.token}]]";
+</script>
 </body>
 </html>
