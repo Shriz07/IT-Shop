@@ -171,5 +171,15 @@ body {
   color: white;
 }
 
+.cartItem{
+  background-color: #4DA8DA;
+  color: black;
+  border-radius: 20px;
+}
+
+.trashIcon{
+  color: #203647;
+}
+
 .easyPaginateNav a {padding:5px;}
 .easyPaginateNav a.current {font-weight:bold;text-decoration:underline;}
