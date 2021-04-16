@@ -15,44 +15,72 @@
     <div>
         <h1>Create new account</h1>
     </div>
-    <form th:action="@{/registerUser}" method="post" th:object="${user}" style="max-width: 600px; margin: 0 auto;">
+    <form th:action="@{/registerUser}" method="post" style="max-width: 600px; margin: 0 auto;">
         <div class="m-3">
-            <div class="form-group row">
+            <div class="form-group row mt-2">
                 <label class="col-form-label col-4">E-mail</label>
                 <div class="col-5">
-                    <input type="email" class="form-control" th:field="*{email}" required>
+                    <input type="email" class="form-control" th:field="*{user.email}" required>
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row mt-2">
                 <label class="col-form-label col-4">Password</label>
                 <div class="col-5">
-                    <input type="password" class="form-control" th:field="*{password}" required minlength="6">
+                    <input type="password" class="form-control" th:field="*{user.password}" required minlength="6">
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row mt-2">
                 <label class="col-form-label col-4">Name</label>
                 <div class="col-5">
-                    <input type="text" class="form-control" th:field="*{name}" required minlength="3">
+                    <input type="text" class="form-control" th:field="*{user.name}" required minlength="3">
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row mt-2">
                 <label class="col-form-label col-4">Surname</label>
                 <div class="col-5">
-                    <input type="text" class="form-control" th:field="*{surname}" required minlength="3">
+                    <input type="text" class="form-control" th:field="*{user.surname}" required minlength="3">
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row mt-2">
                 <label class="col-form-label col-4">Phone Number</label>
                 <div class="col-5">
-                    <input type="text" class="form-control" th:field="*{phoneNumber}" required>
+                    <input type="text" class="form-control" th:field="*{user.phoneNumber}" required>
                 </div>
             </div>
 
-            <div>
+            <div class="form-group row mt-2">
+                <label class="col-form-label col-4">City</label>
+                <div class="col-5">
+                    <input type="text" class="form-control" th:field="*{address.city}" required minlength="4">
+                </div>
+            </div>
+
+            <div class="form-group row mt-2">
+                <label class="col-form-label col-4">Postal code</label>
+                <div class="col-5">
+                    <input type="text" class="form-control" th:field="*{address.postalCode}" required minlength="6">
+                </div>
+            </div>
+
+            <div class="form-group row mt-2">
+                <label class="col-form-label col-4">Street</label>
+                <div class="col-5">
+                    <input type="text" class="form-control" th:field="*{address.street}" required minlength="4">
+                </div>
+            </div>
+
+            <div class="form-group row mt-2">
+                <label class="col-form-label col-4">Home number</label>
+                <div class="col-5">
+                    <input type="text" class="form-control" th:field="*{address.homeNumber}" required>
+                </div>
+            </div>
+
+            <div class="mt-2">
                 <button type="submit" class="btn btn-primary">Sign up</button>
             </div>
         </div>
