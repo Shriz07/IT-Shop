@@ -44,12 +44,6 @@ public class AppController
         return "register";
     }
 
-    @GetMapping("/testindex")
-    public String  testIndex(Model model)
-    {
-        return "testindex";
-    }
-
     @PostMapping("/registerUser")
     public String registerUser(User user)
     {
