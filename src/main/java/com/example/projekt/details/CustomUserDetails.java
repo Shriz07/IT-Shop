@@ -58,6 +58,8 @@ public class CustomUserDetails implements UserDetails
         return true;
     }
 
+    public User getUser() {return user; }
+
     public Integer getId() { return user.getId(); }
 
     public String getFullName()
