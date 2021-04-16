@@ -1,9 +1,7 @@
 package com.example.projekt.controller;
 
-import com.example.projekt.model.Brand;
-import com.example.projekt.model.Category;
-import com.example.projekt.model.Product;
-import com.example.projekt.model.User;
+import com.example.projekt.model.*;
+import com.example.projekt.repository.AddressRepository;
 import com.example.projekt.repository.ProductRepository;
 import com.example.projekt.repository.UserRepository;
 import com.example.projekt.service.*;
@@ -27,6 +25,9 @@ public class AppController
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private AddressRepository addressRepository;
+
     @GetMapping("")
     public String homePage(Model model)
     {
@@ -41,16 +42,20 @@ public class AppController
     public String registerPage(Model model)
     {
         model.addAttribute("user", new User());
+        model.addAttribute("address", new Address());
         return "register";
     }
 
     @PostMapping("/registerUser")
-    public String registerUser(User user)
+    public String registerUser(User user, Address address)
     {
+        //Dodac sprawdzenie czy adres juz nie istnieje
+        addressRepository.save(address);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         user.setRole("user");
+        user.setAddressId(address.getAddressId());
         userRepository.save(user);
         return "registerSuccess";
     }
