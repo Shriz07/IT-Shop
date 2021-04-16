@@ -19,8 +19,7 @@ public class UserService implements IUserService
 
     @Override
     public User findById(Integer id) {
-        User u = repository.findById(id);
-        return u;
+        return repository.findById(id);
     }
 
     @Override
@@ -33,7 +32,6 @@ public class UserService implements IUserService
         else
             u.setRole("user");
         repository.save(u);
-        System.out.println("ROLE " + u.getRole());
         return true;
     }
 }
