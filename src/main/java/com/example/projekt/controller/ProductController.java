@@ -48,16 +48,6 @@ public class ProductController
     @Autowired
     private BrandRepository brandRepository;
 
-    @GetMapping("/products")
-    public String findProducts(Model model) {
-        List<Product> products = (List<Product>) productService.findAll();
-        List<Category> categories = (List<Category>) categoryService.findAll();
-
-        model.addAttribute("products", products);
-        model.addAttribute("categories", categories);
-
-        return "showProducts2";
-    }
 
     @GetMapping("/search")
     public String searchForProducts(Model model, @SearchSpec Specification<Product> specs)
