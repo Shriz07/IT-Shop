@@ -55,7 +55,18 @@ public class CartItemService
         cartItemRepository.updateQuantity(quantity, productId, user.getId());
         Product product = productRepository.findById(productId).get();
         float subtotal = product.getPrice() * quantity;
+        subtotal = (float) (Math.round(subtotal * 100.0) / 100.0);
         return subtotal;
+    }
+
+    public float getTotal(User user)
+    {
+        float total = 0;
+        List<CartItem> cartItems = listCartItems(user);
+        for(CartItem cartItem : cartItems)
+            total = total + cartItem.getProduct().getPrice() * cartItem.getQuantity();
+        total = (float) (Math.round(total * 100.0) / 100.0);
+        return total;
     }
 
     public void removeProduct(Integer productId, User user)
