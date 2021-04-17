@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface AddressRepository extends CrudRepository<Address, Integer>
 {
-
+    public Address findAddressByCityAndPostalCodeAndStreetAndHomeNumber(String city, String postalCode, String street, String homeNumber);
 }
