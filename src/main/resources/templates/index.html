@@ -62,7 +62,7 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="/contactUs">Contact</a>
                 </li>
                 <li class="nav-item me-2">
                     <div class="dropdown">
@@ -72,8 +72,8 @@
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="'/shoppingCart'">Shopping cart</a>
-                            <a class="dropdown-item" th:href="@{/register}">Register</a>
-                            <a class="dropdown-item" th:href="@{/login}">Login</a>
+                            <a class="dropdown-item" sec:authorize="isAuthenticated() == false" th:href="@{/register}">Register</a>
+                            <a class="dropdown-item" sec:authorize="isAuthenticated() == false" th:href="@{/login}">Login</a>
                             <a class="dropdown-item" sec:authorize="isAuthenticated()" href="#">My orders</a>
                             <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="'/myAccount'" >My account</a>
                             <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="'/contactUs'" >Contact us</a>
@@ -166,6 +166,12 @@
 
 
 </body>
+<footer class="bg-light text-center text-lg-start">
+    <div class="myFooter text-center p-3">
+        © 2021 Copyright:
+        <a>Adam Mąkiewicz</a>
+    </div>
+</footer>
 </html>
 
 <script>
