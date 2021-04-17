@@ -49,8 +49,11 @@ public class AppController
     @PostMapping("/registerUser")
     public String registerUser(User user, Address address)
     {
-        //Dodac sprawdzenie czy adres juz nie istnieje
-        addressRepository.save(address);
+        Address addr = addressRepository.findAddressByCityAndPostalCodeAndStreetAndHomeNumber(address.getCity(), address.getPostalCode(), address.getStreet(), address.getHomeNumber());
+        if(addr != null)
+            address = addr;
+        else
+            addressRepository.save(address);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
