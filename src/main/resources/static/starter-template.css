@@ -181,5 +181,22 @@ body {
   color: #203647;
 }
 
+.addressBox{
+  background-color: #203647;
+  color: white;
+  border-radius: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.inputName{
+  text-align: right;
+}
+
+.myFooter{
+  background-color: #203647;
+  color: white;
+}
+
 .easyPaginateNav a {padding:5px;}
 .easyPaginateNav a.current {font-weight:bold;text-decoration:underline;}
