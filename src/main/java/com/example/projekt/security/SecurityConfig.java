@@ -56,16 +56,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
-        http.authorizeRequests()
+        http
+        .authorizeRequests()
                 .antMatchers("/addProduct", "/addCategory", "/addBrand", "/manageUsers", "/manageProducts").hasAuthority("admin")
+                .antMatchers("/shoppingCart/**", "/cart/**", "/checkout/**").hasAnyAuthority("user", "admin")
                 .anyRequest().permitAll()
                 .and()
-                .formLogin()
+        .formLogin()
                 .usernameParameter("email")
                 .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
-                .logout().logoutSuccessUrl("/").permitAll();
+        .logout().logoutSuccessUrl("/").permitAll();
     }
 
 }
