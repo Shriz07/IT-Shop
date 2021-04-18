@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         http
         .authorizeRequests()
                 .antMatchers("/addProduct", "/addCategory", "/addBrand", "/manageUsers", "/manageProducts").hasAuthority("admin")
-                .antMatchers("/shoppingCart/**", "/cart/**", "/checkout/**").hasAnyAuthority("user", "admin")
+                .antMatchers("/shoppingCart/**", "/cart", "/checkout/**").hasAnyAuthority("user", "admin")
                 .anyRequest().permitAll()
                 .and()
         .formLogin()
