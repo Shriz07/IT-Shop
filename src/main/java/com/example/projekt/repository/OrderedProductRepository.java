@@ -1,9 +1,9 @@
 package com.example.projekt.repository;
 
 import com.example.projekt.model.OrderedProduct;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OrderedProductRepository extends CrudRepository<OrderedProduct, Integer>
+public interface OrderedProductRepository extends JpaRepository<OrderedProduct, Integer>
 {
 
 }
