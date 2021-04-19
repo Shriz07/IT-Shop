@@ -22,7 +22,7 @@ public class ShoppingCartController
     public String cart(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails)
     {
         User user = customUserDetails.getUser();
-        List<CartItem> cartItems =  cartItemService.listCartItems(user);
+        List<CartItem> cartItems =  cartItemService.listCartItemsByUser(user);
         model.addAttribute("cartItems", cartItems);
 
         return "cart";
