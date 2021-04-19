@@ -21,7 +21,7 @@ public class CartItemService
     @Autowired
     private ProductRepository productRepository;
 
-    public List<CartItem> listCartItems(User user)
+    public List<CartItem> listCartItemsByUser(User user)
     {
         return cartItemRepository.findByUser(user);
     }
@@ -62,7 +62,7 @@ public class CartItemService
     public float getTotal(User user)
     {
         float total = 0;
-        List<CartItem> cartItems = listCartItems(user);
+        List<CartItem> cartItems = listCartItemsByUser(user);
         for(CartItem cartItem : cartItems)
             total = total + cartItem.getProduct().getPrice() * cartItem.getQuantity();
         total = (float) (Math.round(total * 100.0) / 100.0);
