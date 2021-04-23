@@ -38,6 +38,9 @@ public class OrderController
     @Autowired
     private OrderedProductRepository orderedProductRepository;
 
+    @Autowired
+    private OrderStatusRepository orderStatusRepository;
+
     @GetMapping("/checkout")
     public String checkout(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails)
     {
@@ -72,10 +75,13 @@ public class OrderController
         payment.setPaid(true);
         paymentRepository.save(payment);
 
+        OrderStatus orderStatus = orderStatusRepository.findById(1).get();
+
         Order order = new Order();
         order.setAddress(address);
         order.setPayment(payment);
         order.setUser(user);
+        order.setOrderStatus(orderStatus);
         orderRepository.save(order);
 
         List<CartItem> cartItems =  cartItemService.listCartItemsByUser(user);
