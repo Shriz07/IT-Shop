@@ -28,6 +28,10 @@ public class Order
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
     private Set<OrderedProduct> orderedProducts = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private OrderStatus orderStatus;
+
     public Integer getOrderId() {
         return orderId;
     }
@@ -59,4 +63,10 @@ public class Order
     public void setPayment(Payment payment) {
         this.payment = payment;
     }
+
+    public Set<OrderedProduct> getOrderedProducts() { return orderedProducts; }
+
+    public OrderStatus getOrderStatus() { return orderStatus; }
+
+    public void setOrderStatus(OrderStatus orderStatus) { this.orderStatus = orderStatus; }
 }
