@@ -41,6 +41,22 @@ public class OrderController
     @Autowired
     private OrderStatusRepository orderStatusRepository;
 
+    @GetMapping("/manageOrders")
+    public String manageOrders(Model model)
+    {
+        List<Order> orders = orderRepository.findAll();
+
+        model.addAttribute("orders", orders);
+        return "manageOrders";
+    }
+
+    @GetMapping("/orderDetails")
+    public String orderDetails(Model model, @RequestParam(value = "orderId") Integer id)
+    {
+        model.addAttribute("orderId", id);
+        return "orderDetails";
+    }
+
     @GetMapping("/checkout")
     public String checkout(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails)
     {
