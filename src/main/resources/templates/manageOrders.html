@@ -122,29 +122,30 @@
             <thead>
             <tr>
                 <th scope="col">ID</th>
+                <th scope="col">User ID</th>
                 <th scope="col">Payment ID</th>
                 <th scope="col">Total cost</th>
-                <th scope="col">User ID</th>
                 <th scope="col">Status</th>
                 <th scope="col">Show details</th>
-                <th scope="col">Update</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="order : ${orders}">
                 <th scope="row" th:text="${order.orderId}"></th>
+                <td th:text="${order.getUser().id}"></td>
                 <td th:text="${order.getPayment().getPaymentId()}"></td>
                 <td th:text="${order.getPayment().getTotalAmount()}"></td>
-                <td th:text="${order.getUser().id}"></td>
-                <td th:text="${order.getOrderStatus().name}"></td>
-                <td>
-                    <form method="get" th:action="@{/orderDetails(orderId=${order.orderId})}">
-                        <button class="btn btn-outline-success" type="submit" th:name="orderId" th:value="${order.orderId}">Show details</button>
+                <td style="vertical-align: middle">
+                    <form method="post" th:action="@{/updateOrder(orderId=${order.orderId})}">
+                        <select name="orderStatusId" class="form-select text-white bg-dark">
+                            <option th:each="status : ${orderStatuses}" th:text="${status.name}" th:value="${status.statusId}" th:selected="${status.statusId == order.getOrderStatus().statusId}">1</option>
+                        </select>
+                        <button class="btn btn-outline-warning mt-2" type="submit" th:name="orderId" th:value="${order.orderId}">Update status</button>
                     </form>
                 </td>
                 <td>
-                    <form method="post" th:action="@{/}">
-                        <button class="btn btn-outline-warning" type="submit" th:name="orderId" th:value="${order.orderId}">Update order</button>
+                    <form method="get" th:action="@{/orderDetails(orderId=${order.orderId})}">
+                        <button class="btn btn-outline-success" type="submit" th:name="orderId" th:value="${order.orderId}">Show details</button>
                     </form>
                 </td>
             </tr>
