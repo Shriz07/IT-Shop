@@ -198,5 +198,17 @@ body {
   color: white;
 }
 
+.deliveryTitle{
+  width: 25%;
+  text-align: right;
+  font-size: 20px;
+}
+
+.deliveryValue{
+  width: 25%;
+  text-align: left;
+  font-size: 20px;
+}
+
 .easyPaginateNav a {padding:5px;}
 .easyPaginateNav a.current {font-weight:bold;text-decoration:underline;}
