@@ -4,6 +4,8 @@ import com.example.projekt.details.CustomUserDetails;
 import com.example.projekt.model.*;
 import com.example.projekt.repository.*;
 import com.example.projekt.service.CartItemService;
+import com.example.projekt.service.OrderService;
+import com.example.projekt.service.OrderedProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -41,19 +43,52 @@ public class OrderController
     @Autowired
     private OrderStatusRepository orderStatusRepository;
 
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private OrderedProductService orderedProductService;
+
     @GetMapping("/manageOrders")
     public String manageOrders(Model model)
     {
         List<Order> orders = orderRepository.findAll();
+        List<OrderStatus> orderStatuses = orderStatusRepository.findAll();
+        Integer val = -1;
 
         model.addAttribute("orders", orders);
+        model.addAttribute("orderStatuses", orderStatuses);
+        model.addAttribute("val", val);
+        return "manageOrders";
+    }
+
+    @PostMapping("/updateOrder")
+    public String updateOrder(Model model, @RequestParam(value = "orderId") Integer id, @RequestParam("orderStatusId") Integer orderStatusId)
+    {
+        orderService.updateOrderStatus(id, orderStatusId);
+
+        List<Order> orders = orderRepository.findAll();
+        List<OrderStatus> orderStatuses = orderStatusRepository.findAll();
+
+        model.addAttribute("orders", orders);
+        model.addAttribute("orderStatuses", orderStatuses);
         return "manageOrders";
     }
 
     @GetMapping("/orderDetails")
-    public String orderDetails(Model model, @RequestParam(value = "orderId") Integer id)
+    public String orderDetails(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails, @RequestParam(value = "orderId") Integer id)
     {
-        model.addAttribute("orderId", id);
+        /*if(customUserDetails.getUser() == null)
+            return "error";*/
+
+        Order order = orderRepository.findById(id).get();
+        List<OrderedProduct> orderedProducts = orderedProductService.findByOrder(order);
+
+
+        model.addAttribute("orderedProducts", orderedProducts);
+        model.addAttribute("address", order.getAddress());
+        model.addAttribute("user", order.getUser());
+        model.addAttribute("totalCost", order.getPayment().getTotalAmount());
         return "orderDetails";
     }
 
