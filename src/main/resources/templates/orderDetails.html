@@ -112,16 +112,106 @@
     <div class="container text-center">
         <br>
         <br>
-        <div>
-            <h1>Order details</h1>
-            <h1 th:text="${orderId}"></h1>
+        <div class="row m-1">
+            <div class="col-sm-8">
+                <th:block th:each="item, status : ${orderedProducts}">
+                    <div class="row cartItem" th:with="product = ${item.getProduct()}" th:id="'row' + ${status.count}">
+                        <div class="col-1">
+                            <div>
+                                [[${status.count}]]
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <img th:src="@{${'/product_images/' + product.image}}" class="img-fluid"/>
+                        </div>
+                        <div class="col-6 d-flex align-items-center flex-column">
+                            <div class="p-1">
+                                <a style="cursor: pointer; font-size: 20px;">
+                                    <b th:onclick="'window.location.href=\'/productDetails?productId=' + ${item.product.productId} + '\''">[[${product.name}]]</b>
+                                </a>
+                            </div>
+                            <div class="p-1">
+                                <span style="font-size: 20px">Item quantity: [[${item.quantity}]]</span>
+                            </div>
+                            <div class="p-1">
+                                <span style="font-size: 20px">Unit price $[[${product.price}]]</span>
+                            </div>
+                            <div class="p-1">
+                                <span class="h4">Subtotal $ </span><span class="h4 productSubtotal">[[${item.subtotal}]]</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-1">&nbsp;</div>
+                </th:block>
+            </div>
+
+            <div class="col-sm-4">
+                <div>
+                    <span class="h3">Total cost:</span>
+                </div>
+                <div class="mt-2">
+                    <span class="h2">$[[${totalCost}]]</span>
+                </div>
+                <br>
+                <div>
+                    <span class="h3">Customer details:</span>
+                </div>
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-sm table-borderless">
+                        <tbody>
+                        <tr>
+                            <th class="deliveryTitle" scope="row"><strong>Name:</strong></th>
+                            <td class="deliveryValue" th:text="${user.name}"></td>
+                        </tr>
+                        <tr>
+                            <th class="deliveryTitle"  scope="row"><strong>Surname:</strong></th>
+                            <td class="deliveryValue" th:text="${user.surname}"></td>
+                        </tr>
+                        <tr>
+                            <th class="deliveryTitle"  scope="row"><strong>Email:</strong></th>
+                            <td class="deliveryValue"  th:text="${user.email}"></td>
+                        </tr>
+                        <tr>
+                            <th class="deliveryTitle"  scope="row"><strong>Phone number:</strong></th>
+                            <td class="deliveryValue"  th:text="${user.phoneNumber}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <div>
+                    <span class="h3">Delivery address:</span>
+                </div>
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-sm table-borderless">
+                        <tbody>
+                        <tr>
+                            <th class="deliveryTitle" scope="row"><strong>City:</strong></th>
+                            <td class="deliveryValue"  th:text="${address.city}"></td>
+                        </tr>
+                        <tr>
+                            <th class="deliveryTitle"  scope="row"><strong>Postal code:</strong></th>
+                            <td class="deliveryValue"th:text="${address.postalCode}"></td>
+                        </tr>
+                        <tr>
+                            <th class="deliveryTitle"  scope="row"><strong>Street:</strong></th>
+                            <td class="deliveryValue"  th:text="${address.street}"></td>
+                        </tr>
+                        <tr>
+                            <th class="deliveryTitle"  scope="row"><strong>Home number:</strong></th>
+                            <td class="deliveryValue" th:text="${address.homeNumber}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         <br>
     </div>
 
 </main><!-- /.container -->
-
-
 </body>
 <footer class="bg-light text-center text-lg-start fixed-bottom">
     <div class="myFooter text-center p-3">
