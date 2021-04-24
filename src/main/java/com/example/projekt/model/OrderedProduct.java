@@ -52,4 +52,10 @@ public class OrderedProduct
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
+    @Transient
+    public float getSubtotal()
+    {
+        return this.product.getPrice() * quantity;
+    }
 }
