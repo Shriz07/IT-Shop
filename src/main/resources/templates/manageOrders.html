@@ -111,7 +111,7 @@
 
 <main class="container">
 
-    <div class="container text-center">
+    <span class="container text-center">
         <br>
         <br>
         <div>
@@ -135,12 +135,15 @@
                 <td th:text="${order.getUser().id}"></td>
                 <td th:text="${order.getPayment().getPaymentId()}"></td>
                 <td th:text="${order.getPayment().getTotalAmount()}"></td>
-                <td style="vertical-align: middle">
+                <td sec:authorize="hasAuthority('user')" th:text="${order.getOrderStatus().name}"></td>
+                <td style="vertical-align: middle" sec:authorize="hasAuthority('admin')">
                     <form method="post" th:action="@{/updateOrder(orderId=${order.orderId})}">
-                        <select name="orderStatusId" class="form-select text-white bg-dark">
-                            <option th:each="status : ${orderStatuses}" th:text="${status.name}" th:value="${status.statusId}" th:selected="${status.statusId == order.getOrderStatus().statusId}">1</option>
-                        </select>
-                        <button class="btn btn-outline-warning mt-2" type="submit" th:name="orderId" th:value="${order.orderId}">Update status</button>
+                        <div style="display: flex; justify-content: center;">
+                            <select name="orderStatusId" class="form-select text-white bg-dark" style="width: 50%;">
+                                <option th:each="status : ${orderStatuses}" th:text="${status.name}" th:value="${status.statusId}" th:selected="${status.statusId == order.getOrderStatus().statusId}">1</option>
+                            </select>
+                            <button class="btn btn-outline-warning ml-2" type="submit" th:name="orderId" th:value="${order.orderId}">Update status</button>
+                        </div>
                     </form>
                 </td>
                 <td>
