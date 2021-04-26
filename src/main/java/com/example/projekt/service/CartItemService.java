@@ -26,6 +26,8 @@ public class CartItemService
         return cartItemRepository.findByUser(user);
     }
 
+    public long countItemsInCart(User user) { return cartItemRepository.countItemsInCart(user.getId()); }
+
     public Integer addProduct(Integer productId, Integer quantity, User user)
     {
         Integer addedQuantity = quantity;
