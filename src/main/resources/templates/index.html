@@ -74,7 +74,7 @@
                             <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="'/shoppingCart'">Shopping cart</a>
                             <a class="dropdown-item" sec:authorize="isAuthenticated() == false" th:href="@{/register}">Register</a>
                             <a class="dropdown-item" sec:authorize="isAuthenticated() == false" th:href="@{/login}">Login</a>
-                            <a class="dropdown-item" sec:authorize="isAuthenticated()" href="#">My orders</a>
+                            <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/manageOrders}">My orders</a>
                             <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="'/myAccount'" >My account</a>
                             <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="'/contactUs'" >Contact us</a>
                         </div>
@@ -114,19 +114,22 @@
     </div>
 </nav>
 
-<main class="container">
 
-    <div class="d-flex" id="wrapper">
+    <div class="wrapper mt-5">
 
-        <div id="sidebar-wrapper">
-            <div class="sidebar-heading">Categories</div>
-            <div class="list-group list-group-flush" th:each="category : ${categories}">
-                <a th:href="'/productsInCategory?categoryId=' + ${category.categoryId} + ''" class="list-group-item list-group-item-action" th:text="${category.name}">Default</a>
+        <nav class="sidebar-wrapper">
+            <div class="sidebar-header">
+                <h3>Categories</h3>
             </div>
-        </div>
+            <ul class="list-unstyled components" th:each="category : ${categories}">
+                <li>
+                    <a th:href="'/productsInCategory?categoryId=' + ${category.categoryId} + ''" th:text="${category.name}">Default</a>
+                </li>
+            </ul>
+        </nav>
 
         <div class="content-wrapper">
-                <div th:unless="${#lists.isEmpty(products)}" class="container mb-5 mt-5">
+                <div th:unless="${#lists.isEmpty(products)}" class="container mb-5">
                     <div id="pageContent" class="row">
                         <div class="prod col-md-4" th:each="product : ${products}">
                             <div class="card mt-3">
@@ -160,9 +163,7 @@
                 </div>
         </div>
     </div>
-    <div id="navWrapper"></div>
 
-</main><!-- /.container -->
 
 
 </body>
