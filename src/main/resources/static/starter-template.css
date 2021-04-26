@@ -40,8 +40,16 @@ body {
   color: white;
 }
 
+.nav-item{
+  font-size: 20px;
+}
+
 .nav-link{
   color: white;
+}
+
+.nav-link:hover{
+  color: #007CC7;
 }
 
 .content-wrapper{
