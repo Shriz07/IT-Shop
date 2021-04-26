@@ -1,16 +1,19 @@
 package com.example.projekt.controller;
 
+import com.example.projekt.details.CustomUserDetails;
 import com.example.projekt.model.*;
 import com.example.projekt.repository.AddressRepository;
 import com.example.projekt.repository.ProductRepository;
 import com.example.projekt.repository.UserRepository;
 import com.example.projekt.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @Controller
@@ -28,13 +31,20 @@ public class AppController
     @Autowired
     private AddressRepository addressRepository;
 
+    @Autowired
+    private CartItemService cartItemService;
+
     @GetMapping("")
-    public String homePage(Model model)
+    public String homePage(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails)
     {
+        long count = 0;
+        if(customUserDetails != null)
+            count = cartItemService.countItemsInCart(customUserDetails.getUser());
         List<Product> products = productService.findAll();
         List<Category> categories = categoryService.findAll();
         model.addAttribute("products", products);
         model.addAttribute("categories", categories);
+        model.addAttribute("itemsCount", count);
         return "index";
     }
 
@@ -47,8 +57,15 @@ public class AppController
     }
 
     @PostMapping("/registerUser")
-    public String registerUser(User user, Address address)
+    public String registerUser(Model model, User user, Address address)
     {
+        if( userRepository.findByEmail(user.getEmail()) != null)
+        {
+            model.addAttribute("user", new User());
+            model.addAttribute("address", new Address());
+            model.addAttribute("status", "User with that email exists.");
+            return "register";
+        }
         Address addr = addressRepository.findAddressByCityAndPostalCodeAndStreetAndHomeNumber(address.getCity(), address.getPostalCode(), address.getStreet(), address.getHomeNumber());
         if(addr != null)
             address = addr;
