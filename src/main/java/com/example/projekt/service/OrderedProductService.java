@@ -2,6 +2,7 @@ package com.example.projekt.service;
 
 import com.example.projekt.model.Order;
 import com.example.projekt.model.OrderedProduct;
+import com.example.projekt.model.User;
 import com.example.projekt.repository.OrderedProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
