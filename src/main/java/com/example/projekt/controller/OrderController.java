@@ -8,10 +8,10 @@ import com.example.projekt.service.OrderService;
 import com.example.projekt.service.OrderedProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -50,9 +50,18 @@ public class OrderController
     private OrderedProductService orderedProductService;
 
     @GetMapping("/manageOrders")
-    public String manageOrders(Model model)
+    public String manageOrders(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails)
     {
-        List<Order> orders = orderRepository.findAll();
+        User user = customUserDetails.getUser();
+        if(user == null)
+            return "error";
+        List<Order> orders;
+        System.out.println(customUserDetails.getAuthorities());
+        if(customUserDetails.getAuthorities().contains(new SimpleGrantedAuthority("admin")))
+            orders = orderRepository.findAll();
+        else
+            orders = orderRepository.findByUser(user);
+
         List<OrderStatus> orderStatuses = orderStatusRepository.findAll();
         Integer val = -1;
 
@@ -78,10 +87,14 @@ public class OrderController
     @GetMapping("/orderDetails")
     public String orderDetails(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails, @RequestParam(value = "orderId") Integer id)
     {
-        /*if(customUserDetails.getUser() == null)
-            return "error";*/
-
+        User user = customUserDetails.getUser();
+        if(user == null)
+            return "error";
         Order order = orderRepository.findById(id).get();
+        if(customUserDetails.getAuthorities().contains(new SimpleGrantedAuthority("user")))
+            if(order.getUser().getId() != user.getId())
+                return "error";
+
         List<OrderedProduct> orderedProducts = orderedProductService.findByOrder(order);
 
 
