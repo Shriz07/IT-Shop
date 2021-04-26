@@ -133,17 +133,17 @@
                         <div class="col-3">
                             <img th:src="@{${'/product_images/' + product.image}}" class="img-fluid"/>
                         </div>
-                        <div class="col-6">
-                            <div>
-                                <a style="cursor: pointer">
+                        <div class="col-6" d-flex align-items-center flex-column>
+                            <div class="p-1">
+                                <a style="cursor: pointer; font-size: 20px;">
                                     <b th:onclick="'window.location.href=\'/productDetails?productId=' + ${item.product.productId} + '\''">[[${product.name}]]</b>
                                 </a>
                             </div>
-                            <div th:replace="quantity_controller :: quantity_controller(${item.quantity}, ${item.product.productId})">Quantity</div>
-                            <div>
+                            <div class="p-1" style="font-size: 20px" th:replace="quantity_controller :: quantity_controller(${item.quantity}, ${item.product.productId})">Quantity</div>
+                            <div class="p-1" style="font-size: 20px">
                                 <span>$[[${product.price}]]</span>
                             </div>
-                            <div>
+                            <div class="p-1" style="font-size: 20px">
                                 <span class="h4">Subtotal $ </span><span th:id="subtotal + ${product.productId}" class="h4 productSubtotal">[[${item.subtotal}]]</span>
                             </div>
                         </div>
