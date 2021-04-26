@@ -1,6 +1,7 @@
 package com.example.projekt.service;
 
 import com.example.projekt.model.Order;
+import com.example.projekt.model.User;
 import com.example.projekt.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ public class OrderService implements IOrderService
     public List<Order> findAll() {
         return (List<Order>) orderRepository.findAll();
     }
+
+    public List<Order> findByUser(User user) { return orderRepository.findByUser(user); }
 
     public void updateOrderStatus(Integer orderId, Integer orderStatusId)
     {
