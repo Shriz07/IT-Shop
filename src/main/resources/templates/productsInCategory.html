@@ -50,7 +50,6 @@
 <nav class="navbar navbar-expand-md navbar-custom fixed-top">
     <div class="container-fluid">
         <img src="logo.png" alt="" class="logo-img">
-        <!--        <a class="navbar-brand" href="/">IT Shop</a>-->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -61,22 +60,22 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="/contactUs">Contact</a>
                 </li>
-                <li class="nav-item me-2">
-                    <div class="dropdown">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Menu
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" sec:authorize="isAuthenticated()" href="#">Shopping cart</a>
-                            <a class="dropdown-item" th:href="@{/register}">Register</a>
-                            <a class="dropdown-item" th:href="@{/login}">Login</a>
-                            <a class="dropdown-item" sec:authorize="isAuthenticated()" href="#">My orders</a>
-                            <a class="dropdown-item" sec:authorize="isAuthenticated()" href="#">My account</a>
-                        </div>
-                    </div>
+                <li class="nav-item" sec:authorize="isAuthenticated() == false">
+                    <a class="nav-link" th:href="'/login'">Login</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated() == false">
+                    <a class="nav-link" th:href="'/register'">Register</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:href="'/shoppingCart'">Shopping cart</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:href="'/manageOrders'">My orders</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:href="'/myAccount'">My account</a>
                 </li>
                 <li class="nav-item me-2" sec:authorize="hasAuthority('admin')">
                     <div class="dropdown">
@@ -89,7 +88,8 @@
                             <a class="dropdown-item" th:href="@{/addCategory}">Add category</a>
                             <a class="dropdown-item" th:href="@{/addBrand}">Add brand</a>
                             <a class="dropdown-item" th:href="@{/manageUsers}">Manage users</a>
-                            <a class="dropdown-item" >Manage orders</a>
+                            <a class="dropdown-item" th:href="@{/manageProducts}">Manage products</a>
+                            <a class="dropdown-item" th:href="@{/manageOrders}">Manage orders</a>
                         </div>
                     </div>
                 </li>
@@ -97,8 +97,8 @@
             <div sec:authorize="isAuthenticated()" style="color: white" class="me-2">
                 <a>Welcome [[${#request.userPrincipal.principal.fullName}]] !</a>
             </div>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" action="/search?search=name:*" onsubmit="location.href = this.action + this.searchText.value + '*'; return false">
+                <input class="form-control me-2" type="search" placeholder="Type ..." aria-label="Search" name="searchText">
                 <button class="btn btn-outline-success me-2" type="submit">Search</button>
             </form>
             <form sec:authorize="isAuthenticated()" th:action="@{/logout}" class="d-flex" method="post">
@@ -108,47 +108,54 @@
     </div>
 </nav>
 
-<main class="container">
+<div class="wrapper mt-5">
 
-    <div class="d-flex" id="wrapper">
-
-        <div id="sidebar-wrapper">
-            <div class="sidebar-heading">Categories</div>
-            <div class="list-group list-group-flush" th:each="category : ${categories}">
-                <a th:href="'/productsInCategory?categoryId=' + ${category.categoryId} + ''" class="list-group-item list-group-item-action" th:text="${category.name}">Default</a>
-            </div>
+    <nav class="sidebar-wrapper">
+        <div class="sidebar-header">
+            <h3>Categories</h3>
         </div>
+        <ul class="list-unstyled components" th:each="category : ${categories}">
+            <li>
+                <a th:href="'/productsInCategory?categoryId=' + ${category.categoryId} + ''" th:text="${category.name}">Default</a>
+            </li>
+        </ul>
+    </nav>
 
-        <div class="content-wrapper">
-
-            <div class="container mb-5 mt-5">
-                <div class="row">
-                    <div class="col-md-4" th:each="product : ${products}">
-                        <div class="card mt-3">
-                            <div class="product-1 align-items-center p-2 text-center" th:onclick="'window.location.href=\'/productDetails?productId=' + ${product.productId} + '\''" style="cursor: pointer;">
-                                <div class="product-image">
-                                    <img th:src="@{${'/product_images/' + product.image}}" alt="" class="rounded" width="160">
-                                </div>
-                                <h5 th:text="${product.name}">Default</h5>
-                                <div class="mt-3 info">
-                                    <span class="text1 d-block" th:text="${product.brand}">Some text</span>
-                                </div>
-                                <div class="cost mt-3 text-dark">
-                                    <span th:text="'$' + ${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}">Default</span>
-                                </div>
+    <div class="content-wrapper">
+        <div th:unless="${#lists.isEmpty(products)}" class="container mb-5">
+            <div id="pageContent" class="row">
+                <div class="prod col-md-4" th:each="product : ${products}">
+                    <div class="card mt-3">
+                        <div class="product-1 align-items-center p-2 text-center" th:onclick="'window.location.href=\'/productDetails?productId=' + ${product.productId} + '\''" style="cursor: pointer;">
+                            <div class="product-image">
+                                <img th:src="@{${'/product_images/' + product.image}}" alt="" class="rounded" width="160" height="160">
                             </div>
-                            <div class="p-3 defcard text-center text-white mt-3 cursor">
-                                <span class="text-uppercase">Add to cart</span>
+                            <h5 th:text="${product.name}">Default</h5>
+                            <div class="mt-3 info">
+                                <span class="text1 d-block" th:text="${product.brand}">Some text</span>
                             </div>
+                            <div class="cost mt-3 text-dark">
+                                <span th:text="'$' + ${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}">Default</span>
+                            </div>
+                        </div>
+                        <div class="p-3 defcard text-center text-white mt-3 cursor">
+                            <span class="text-uppercase">Add to cart</span>
                         </div>
                     </div>
                 </div>
             </div>
-
+        </div>
+        <div th:unless="${not #lists.isEmpty(products)}" class="container text-center">
+            <div>
+                <br>
+                <br>
+                <h3>No products were found.</h3>
+                <br>
+                <br>
+            </div>
         </div>
     </div>
-
-</main><!-- /.container -->
+</div>
 
 
 </body>
