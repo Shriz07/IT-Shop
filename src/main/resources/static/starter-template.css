@@ -49,31 +49,41 @@ body {
   width: 100%;
 }
 
-#sidebar-wrapper {
-  padding-top: 3vw;
-  background-color: white;
-  min-height: 100vh;
-  margin-left: -12vw;
+.wrapper{
+  display: flex;
+  align-items: stretch;
 }
 
-#sidebar-wrapper .sidebar-heading {
-  padding: 0.875rem 1.25rem;
+.sidebar-header{
+  background-color: #12232E;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.sidebar-wrapper{
+  background-color: #203647;
+  min-width: 250px;
+  max-width: 250px;
+  height: fit-content;
   font-size: 1.2rem;
 }
 
-#sidebar-wrapper .list-group {
-  width: 15rem;
+.sidebar-wrapper ul.components{
+  margin: 20px;
 }
 
-#wrapper.toggled #sidebar-wrapper {
-  margin-left: 0;
+.sidebar-wrapper ul li a{
+  display: block;
+  color: white;
+  text-decoration: none;
+  text-align: center;
 }
 
-.sidebar-heading{
-  background-color: #12232E;
+.sidebar-wrapper ul li a:hover {
+  background-color: #007CC7;
   color: white;
 }
-
 .list-group-item{
   background-color: #203647;
   color: white;
