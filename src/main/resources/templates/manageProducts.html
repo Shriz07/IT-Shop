@@ -128,6 +128,7 @@
                 <th scope="col">Category</th>
                 <th scope="col">Price</th>
                 <th scope="col">In stock</th>
+                <th scope="col">Modify</th>
                 <th scope="col">Delete</th>
             </tr>
             </thead>
@@ -154,8 +155,13 @@
                 <td th:text="${product.price}"></td>
                 <td th:text="${product.inStock}"></td>
                 <td>
+                    <form method="get" th:action="@{/modifyProduct}">
+                        <button class="btn btn-outline-warning" type="submit" th:name="productId" th:value="${product.productId}">Modify</button>
+                    </form>
+                </td>
+                <td>
                     <form method="post" th:action="@{/deleteProduct}">
-                        <button class="btn btn-outline-warning" type="submit" th:name="id" th:value="${product.productId}">Delete product</button>
+                        <button class="btn btn-outline-danger" type="submit" th:name="id" th:value="${product.productId}">Delete product</button>
                     </form>
                 </td>
             </tr>
@@ -183,6 +189,7 @@
                 null,
                 { searchable: false },
                 { searchable: false },
+                null,
                 null,
                 null,
                 null,
