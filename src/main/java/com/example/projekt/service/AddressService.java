@@ -10,10 +10,20 @@ import java.util.List;
 public class AddressService implements IAddressService
 {
     @Autowired
-    private AddressRepository repository;
+    private AddressRepository addressRepository;
 
     @Override
     public List<Address> findAll() {
-        return (List<Address>) repository.findAll();
+        return (List<Address>) addressRepository.findAll();
+    }
+
+    public Address addNewAddress(Address address)
+    {
+        Address addr = addressRepository.findAddressByCityAndPostalCodeAndStreetAndHomeNumber(address.getCity(), address.getPostalCode(), address.getStreet(), address.getHomeNumber());
+        if(addr != null)
+            address = addr;
+        else
+            addressRepository.save(address);
+        return address;
     }
 }
