@@ -1,8 +1,7 @@
 package com.example.projekt.controller;
 
 import com.example.projekt.model.Category;
-import com.example.projekt.repository.CategoryRepository;
-import com.example.projekt.service.ICategoryService;
+import com.example.projekt.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +14,7 @@ import java.util.List;
 public class CategoryController
 {
     @Autowired
-    private ICategoryService categoryService;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private CategoryService categoryService;
 
     @GetMapping("/addCategory")
     public String addCategory(Model model)
@@ -32,16 +28,13 @@ public class CategoryController
     @PostMapping("/addCategory")
     public String addCategory(Model model, Category category)
     {
-        List<Category> categories = categoryService.findAll();
-        model.addAttribute("categories", categories);
-        try {
-            categoryRepository.save(category);
-        }
-        catch (Exception e)
+        if(categoryService.addCategory(category) == 0)
         {
             String status = "Category already exists";
             model.addAttribute("status", status);
         }
+        List<Category> categories = categoryService.findAll();
+        model.addAttribute("categories", categories);
         return "addCategory";
     }
 }

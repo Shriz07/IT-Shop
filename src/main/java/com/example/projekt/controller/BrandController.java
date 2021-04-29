@@ -2,6 +2,7 @@ package com.example.projekt.controller;
 
 import com.example.projekt.model.Brand;
 import com.example.projekt.repository.BrandRepository;
+import com.example.projekt.service.BrandService;
 import com.example.projekt.service.IBrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,7 @@ import java.util.List;
 public class BrandController
 {
     @Autowired
-    private IBrandService brandService;
-
-    @Autowired
-    private BrandRepository brandRepository;
+    private BrandService brandService;
 
     @GetMapping("/addBrand")
     public String addBrand(Model model)
@@ -34,11 +32,7 @@ public class BrandController
     @PostMapping("/addBrand")
     public String addBrand(Model model, Brand brand)
     {
-        try
-        {
-            brandRepository.save(brand);
-        }
-        catch (Exception e)
+        if(brandService.addBrand(brand) == 0)
         {
             String status = "Brand already exists";
             model.addAttribute("status", status);
