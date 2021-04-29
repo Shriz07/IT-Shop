@@ -3,6 +3,7 @@ package com.example.projekt.restController;
 import com.example.projekt.details.CustomUserDetails;
 import com.example.projekt.model.User;
 import com.example.projekt.service.CartItemService;
+import com.example.projekt.service.ProductService;
 import com.example.projekt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -39,7 +40,7 @@ public class ShoppingCartRestController
         User user = customUserDetails.getUser();
 
         float subtotal = cartItemService.updateQuantity(productId, quantity, user);
-
+        subtotal = (float) (Math.round(subtotal * 100.0) / 100.0);
         return String.valueOf(subtotal);
     }
 
