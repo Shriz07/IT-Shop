@@ -29,7 +29,7 @@ public class Product
 
     public Integer getProductId() { return productId; }
 
-    public void setProductIdId(Integer productId) { this.productId = productId; }
+    public void setProductId(Integer productId) { this.productId = productId; }
 
     public String getName()
     {
