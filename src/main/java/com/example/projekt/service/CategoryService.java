@@ -11,16 +11,28 @@ import java.util.Optional;
 public class CategoryService implements ICategoryService
 {
     @Autowired
-    private CategoryRepository repository;
+    private CategoryRepository categoryRepository;
 
     @Override
     public List<Category> findAll() {
-        return (List<Category>) repository.findAll();
+        return (List<Category>) categoryRepository.findAll();
     }
 
     @Override
     public String findCategoryName(Integer id) {
-        Optional<Category> cat = repository.findById(id);
+        Optional<Category> cat = categoryRepository.findById(id);
         return cat.get().getName();
+    }
+
+    public int addCategory(Category category)
+    {
+        try {
+            categoryRepository.save(category);
+        }
+        catch (Exception e)
+        {
+            return 0;
+        }
+        return 1;
     }
 }
