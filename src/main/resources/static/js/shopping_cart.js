@@ -70,7 +70,7 @@ function decreaseQuantity(link)
 
 function updateQuantity(productId, quantity)
 {
-    url = "/cart/update/" + productId + "/" + quantity;
+    let url = "/cart/update/" + productId + "/" + quantity;
 
     $.ajax({
         type: "POST",
@@ -91,10 +91,10 @@ function updateSubtotal(newSubtotal, productId)
 
 function updateTotal()
 {
-    total = 0.0;
+    let total = 0.0;
     $(".productSubtotal").each(function (index, element){
        total = total + parseFloat(element.innerHTML);
     });
-
+    total = total.toFixed(2);
     $("#totalAmount").text("$" + total);
 }
