@@ -10,10 +10,23 @@ import java.util.List;
 public class BrandService implements IBrandService
 {
     @Autowired
-    private BrandRepository repository;
+    private BrandRepository brandRepository;
 
     @Override
     public List<Brand> findAll() {
-        return (List<Brand>) repository.findAll();
+        return (List<Brand>) brandRepository.findAll();
+    }
+
+    public int addBrand(Brand brand)
+    {
+        try
+        {
+            brandRepository.save(brand);
+        }
+        catch (Exception e)
+        {
+            return 0;
+        }
+        return 1;
     }
 }
