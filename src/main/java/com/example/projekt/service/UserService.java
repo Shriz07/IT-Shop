@@ -2,6 +2,7 @@ package com.example.projekt.service;
 import com.example.projekt.model.User;
 import com.example.projekt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,17 +11,19 @@ import java.util.List;
 public class UserService implements IUserService
 {
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
 
     @Override
     public List<User> findAll() {
-        return (List<User>) repository.findAll();
+        return (List<User>) userRepository.findAll();
     }
 
     @Override
     public User findById(Integer id) {
-        return repository.findById(id);
+        return userRepository.findById(id);
     }
+
+    public User findByEmail(String email) { return userRepository.findByEmail(email); }
 
     @Override
     public boolean changeRole(Integer id) {
@@ -31,7 +34,19 @@ public class UserService implements IUserService
             u.setRole("admin");
         else
             u.setRole("user");
-        repository.save(u);
+        userRepository.save(u);
         return true;
+    }
+
+    public int addNewUser(User user, Integer addressId)
+    {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        user.setRole("user");
+        user.setAddressId(addressId);
+        userRepository.save(user);
+
+        return 0;
     }
 }
