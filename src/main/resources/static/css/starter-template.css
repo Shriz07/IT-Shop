@@ -240,5 +240,15 @@ body {
   margin-bottom: 100px;
 }
 
+.page-item.active .page-link{
+  color: white !important;
+  background: #203647 !important;
+}
+
+.page-link{
+  color: white !important;
+  background: #007CC7 !important;
+}
+
 .easyPaginateNav a {padding:5px;}
 .easyPaginateNav a.current {font-weight:bold;text-decoration:underline;}
