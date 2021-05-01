@@ -118,20 +118,22 @@
         <div>
             <h1>Add new brand</h1>
         </div>
-        <form th:action="@{/addBrand}" method="post" th:object="${brand}" style="max-width: 600px; margin: 0 auto;" enctype="multipart/form-data">
-            <div class="m-3">
-                <div class="form-group row">
-                    <label class="col-form-label col-4">Brand name</label>
-                    <div class="col-5">
-                        <input style="width: 300px"  type="text" class="form-control" th:field="*{name}" required>
+        <div class="formAddBox">
+            <form class="pt-2 pb-2" th:action="@{/addBrand}" method="post" th:object="${brand}" style="max-width: 600px; margin: 0 auto;" enctype="multipart/form-data">
+                <div class="m-3">
+                    <div class="form-group row mt-2">
+                        <label class="col-form-label col-4">Brand name</label>
+                        <div class="col-5">
+                            <input style="width: 300px"  type="text" class="form-control" th:field="*{name}" required>
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <button type="submit" class="btn btn-primary mt-3">Add brand</button>
                     </div>
                 </div>
-                <br>
-                <div>
-                    <button type="submit" class="btn btn-primary">Add brand</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
         <br>
         <div>
             <h1 th:text="${status}" style="color: #ff0000;"></h1>

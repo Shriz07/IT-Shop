@@ -207,6 +207,14 @@ body {
   margin: auto;
 }
 
+.formAddBox{
+  background-color: #203647;
+  color: white;
+  border-radius: 20px;
+  max-width: 500px;
+  margin: auto;
+}
+
 .inputName{
   text-align: right;
 }
