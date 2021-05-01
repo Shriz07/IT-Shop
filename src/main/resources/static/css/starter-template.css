@@ -10,8 +10,14 @@
   font-family: 'Glyphs', sans-serif;
 }
 
+html, body{
+  height: 100%;
+}
+
 body {
   padding-top: 5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .dropdown-toggle{
@@ -60,6 +66,8 @@ body {
 .wrapper{
   display: flex;
   align-items: stretch;
+  flex: 1 0 auto;
+  margin-bottom: 50px;
 }
 
 .sidebar-header{
@@ -205,6 +213,7 @@ body {
   border-radius: 20px;
   max-width: 1000px;
   margin: auto;
+  box-shadow:0 0 20px rgba(0,0,0,0.8);
 }
 
 .formAddBox{
@@ -224,6 +233,10 @@ body {
   color: white;
 }
 
+.site-footer{
+  flex-shrink: 0;
+}
+
 .deliveryTitle{
   width: 25%;
   text-align: right;
@@ -236,9 +249,6 @@ body {
   font-size: 20px;
 }
 
-.container{
-  margin-bottom: 100px;
-}
 
 .page-item.active .page-link{
   color: white !important;
@@ -248,6 +258,76 @@ body {
 .page-link{
   color: white !important;
   background: #007CC7 !important;
+}
+
+
+#sidebar {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 250px;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #203647;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#sidebar header {
+  background-color: #12232E;
+  font-size: 20px;
+  line-height: 52px;
+  text-align: center;
+}
+
+#sidebar header a {
+  color: #fff;
+  display: block;
+  text-decoration: none;
+}
+
+#sidebar header a:hover {
+  color: #fff;
+}
+
+#sidebar .nav-items{
+  list-style-type: none;
+  border-bottom: 1px solid #455A64;
+}
+
+#sidebar .nav-items a{
+  background: none;
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+#sidebar .nav-items a:hover{
+  background: none;
+  color: #007CC7;
+}
+
+#sidebar .nav-items a i{
+  margin-right: 16px;
+}
+
+#sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  left: 25px;
+  font-size: 36px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #12232E;
+  color: white;
+  padding: 10px 15px;
+  border: none;
 }
 
 .easyPaginateNav a {padding:5px;}

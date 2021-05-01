@@ -83,7 +83,7 @@
     </div>
 </nav>
 
-<main class="container">
+<main class="wrapper">
 
     <div class="container text-center">
         <br>
@@ -143,16 +143,16 @@
     </div>
 
 </main><!-- /.container -->
+<footer class="site-footer bg-light text-center text-lg-start">
+    <div class="myFooter text-center p-3">
+        © 2021 Copyright:
+        <a>Adam Mąkiewicz</a>
+    </div>
+</footer>
 <script th:src="@{/js/shopping_cart.js}"></script>
 <script type="text/javascript">
     var csrfHeaderName = "[[${_csrf.headerName}]]";
     var csrfValue = "[[${_csrf.token}]]";
 </script>
 </body>
-<footer class="bg-light text-center text-lg-start fixed-bottom">
-    <div class="myFooter text-center p-3">
-        © 2021 Copyright:
-        <a>Adam Mąkiewicz</a>
-    </div>
-</footer>
 </html>
