@@ -1,12 +1,15 @@
 package com.example.projekt.service;
 
 import com.example.projekt.model.Product;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface IProductService
 {
-    public List<Product> findAll();
+    List<Product> findAll();
 
-    public List<Product> findAllInCategory(Integer id);
+    List<Product> findAllInCategory(Integer id);
+
+    Page<Product> findProductsOnPage(int pageNo, int pageSize);
 }
