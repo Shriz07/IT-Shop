@@ -40,6 +40,7 @@ body {
 .navbar-custom{
   background-color: #12232E;
   min-height: 80px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 .navbar-custom .navbar-brand{
@@ -122,6 +123,7 @@ body {
   outline: none;
   background-color: #4DA8DA;
   border-radius: 20px;
+  box-shadow:0 0 15px rgba(0,0,0,0.8);
 }
 
 .card:hover{
@@ -201,6 +203,7 @@ body {
   background-color: #4DA8DA;
   color: black;
   border-radius: 20px;
+  box-shadow:0 0 15px rgba(0,0,0,0.8);
 }
 
 .trashIcon{
@@ -213,7 +216,7 @@ body {
   border-radius: 20px;
   max-width: 1000px;
   margin: auto;
-  box-shadow:0 0 20px rgba(0,0,0,0.8);
+  box-shadow:0 0 15px rgba(0,0,0,0.8);
 }
 
 .formAddBox{
@@ -222,6 +225,7 @@ body {
   border-radius: 20px;
   max-width: 500px;
   margin: auto;
+  box-shadow:0 0 15px rgba(0,0,0,0.8);
 }
 
 .inputName{

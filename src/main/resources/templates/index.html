@@ -23,7 +23,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md navbar-custom fixed-top shadow-lg p-3 mb-5">
+<nav class="navbar navbar-expand-md navbar-custom fixed-top">
     <div class="container-fluid">
         <img src="/logo.png" alt="" class="logo-img">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -113,7 +113,7 @@
             <div th:unless="${#lists.isEmpty(products)}" class="container mb-5">
                 <div id="pageContent" class="row">
                     <div class="prod col-md-4" th:each="product : ${products}">
-                        <div class="card mt-3">
+                        <div class="card mt-4">
                             <div class="product-1 align-items-center p-2 text-center" th:onclick="'window.location.href=\'/productDetails?productId=' + ${product.productId} + '\''" style="cursor: pointer;">
                                 <div class="product-image">
                                     <img th:src="@{${'/product_images/' + product.image}}" alt="" class="rounded" width="160" height="160">
