@@ -4,9 +4,11 @@ import com.example.projekt.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class AddressService implements IAddressService
 {
     @Autowired
@@ -25,5 +27,10 @@ public class AddressService implements IAddressService
         else
             addressRepository.save(address);
         return address;
+    }
+
+    public void updateAddress(Address address)
+    {
+        addressRepository.updateAddress(address.getAddressId(), address.getCity(), address.getPostalCode(), address.getStreet(), address.getHomeNumber());
     }
 }

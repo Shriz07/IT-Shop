@@ -66,7 +66,16 @@ public class UserController
     {
         CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
-        model.addAttribute("address", user.getAddress());
+        model.addAttribute("addr", user.getAddress());
+        return "myAccount";
+    }
+
+    @PostMapping("/updateUserAccount")
+    public String updateUserAccount(Model model, Address addr, User user)
+    {
+        addressService.updateAddress(addr);
+        model.addAttribute("user", user);
+        model.addAttribute("addr", addr);
         return "myAccount";
     }
 }

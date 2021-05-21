@@ -124,7 +124,7 @@ public class OrderController
 
         OrderStatus orderStatus = orderStatusService.findById(1);
 
-        Order order = orderService.addOrder(address, payment, user, orderStatus);
+        Order order = orderService.addOrder(addr, payment, user, orderStatus);
 
         List<CartItem> cartItems =  cartItemService.listCartItemsByUser(user);
         for(CartItem item : cartItems)

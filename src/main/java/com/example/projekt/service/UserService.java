@@ -15,7 +15,7 @@ public class UserService implements IUserService
 
     @Override
     public List<User> findAll() {
-        return (List<User>) userRepository.findAll();
+        return userRepository.findAll();
     }
 
     @Override
@@ -48,5 +48,10 @@ public class UserService implements IUserService
         userRepository.save(user);
 
         return 0;
+    }
+
+    public void updateUser(User user)
+    {
+        userRepository.save(user);
     }
 }
