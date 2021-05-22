@@ -1,6 +1,7 @@
 package com.example.projekt.service;
 import com.example.projekt.model.User;
 import com.example.projekt.repository.UserRepository;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -38,16 +39,24 @@ public class UserService implements IUserService
         return true;
     }
 
-    public int addNewUser(User user, Integer addressId)
+    public boolean addNewUser(User user, Integer addressId)
     {
+        if(!validateUser(user))
+            return false;
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         user.setRole("user");
         user.setAddressId(addressId);
         userRepository.save(user);
+        return true;
+    }
 
-        return 0;
+    private boolean validateUser(User user)
+    {
+        if(!EmailValidator.getInstance().isValid(user.getEmail()))
+            return false;
+        return true;
     }
 
     public void updateUser(User user)
