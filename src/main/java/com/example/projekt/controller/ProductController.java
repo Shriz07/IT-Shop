@@ -127,18 +127,24 @@ public class ProductController
     }
 
     @PostMapping("/modifyProduct")
-    public void modifyProduct(HttpServletResponse response, Product product, @RequestParam("file") MultipartFile file, @RequestParam("dropDownList1") Integer brandId, @RequestParam("dropDownList2") Integer categoryId) throws IOException
+    public void modifyProduct(HttpServletResponse response, Product product, @RequestParam(value = "file", required = false) MultipartFile file, @RequestParam(value = "dropDownList1") Integer brandId, @RequestParam(value = "dropDownList2") Integer categoryId) throws IOException
     {
+        if(brandId == -1)
+            brandId = product.getBrandId();
+        if(categoryId == -1)
+            categoryId = product.getCategoryId();
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
-        Path upload = Paths.get(uploadDirectory);
-        if(!Files.exists(upload))
-            Files.createDirectories(upload);
+        if(filename.length() > 4) {
+            Path upload = Paths.get(uploadDirectory);
+            if (!Files.exists(upload))
+                Files.createDirectories(upload);
 
-        InputStream inputStream = file.getInputStream();
-        Path filePath = upload.resolve(filename);
-        Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+            InputStream inputStream = file.getInputStream();
+            Path filePath = upload.resolve(filename);
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
 
-        product.setImage(filename);
+            product.setImage(filename);
+        }
         productService.updateProduct(product, categoryId, brandId);
 
         response.sendRedirect("/manageProducts");
