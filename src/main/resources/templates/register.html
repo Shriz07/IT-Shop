@@ -128,7 +128,7 @@
                     <div class="inputName form-group row mt-2">
                         <label class="col-form-label col-4">Phone Number</label>
                         <div class="col-5">
-                            <input type="text" class="form-control" th:field="*{user.phoneNumber}" required>
+                            <input type="text" class="form-control" th:field="*{user.phoneNumber}" required minlength="9">
                         </div>
                     </div>
 
