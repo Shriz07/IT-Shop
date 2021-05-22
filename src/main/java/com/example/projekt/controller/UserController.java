@@ -3,20 +3,16 @@ package com.example.projekt.controller;
 import com.example.projekt.details.CustomUserDetails;
 import com.example.projekt.model.Address;
 import com.example.projekt.model.User;
-import com.example.projekt.repository.AddressRepository;
-import com.example.projekt.repository.UserRepository;
 import com.example.projekt.service.AddressService;
-import com.example.projekt.service.IUserService;
 import com.example.projekt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -39,8 +35,23 @@ public class UserController
             return "register";
         }
         Address addr = addressService.addNewAddress(address);
-        userService.addNewUser(user, address.getAddressId());
+        if(!userService.addNewUser(user, addr.getAddressId()))
+            return "registerFailed";
         return "registerSuccess";
+    }
+
+    @GetMapping("/registerUser")
+    public void registerUser(HttpServletResponse response) throws IOException
+    {
+        response.sendRedirect("/register");
+    }
+
+    @GetMapping("/register")
+    public String registerPage(Model model)
+    {
+        model.addAttribute("user", new User());
+        model.addAttribute("address", new Address());
+        return "register";
     }
 
     @GetMapping("/manageUsers")
