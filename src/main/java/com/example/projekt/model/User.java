@@ -3,6 +3,7 @@ package com.example.projekt.model;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -15,12 +16,16 @@ public class User
     @Column(nullable = false)
     private String role;
     @Column(nullable = false)
+    @Size(min = 3, max = 45)
     private String name;
     @Column(nullable = false)
+    @Size(min = 3, max = 45)
     private String surname;
     @Column(nullable = false, unique = true)
+    @Size(min = 3, max = 45)
     private String email;
     @Column(nullable = false, unique = true)
+    @Size(min = 9, max = 45)
     private String phoneNumber;
     @Column(nullable = false)
     private String password;

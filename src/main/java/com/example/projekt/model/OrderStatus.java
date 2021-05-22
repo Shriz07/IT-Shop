@@ -1,6 +1,7 @@
 package com.example.projekt.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "order_statuses")
@@ -10,7 +11,7 @@ public class OrderStatus
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer statusId;
-
+    @Size(min = 3, max = 255)
     private String name;
 
     public Integer getStatusId() {

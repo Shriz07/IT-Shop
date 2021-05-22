@@ -1,6 +1,7 @@
 package com.example.projekt.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "payment_methods")
@@ -10,7 +11,7 @@ public class PaymentMethod
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer methodId;
-
+    @Size(min = 3, max = 255)
     private String name;
 
     public Integer getMethodId() {

@@ -1,6 +1,7 @@
 package com.example.projekt.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ public class Category
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer categoryId;
-
+    @Size(min = 3, max = 45)
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")

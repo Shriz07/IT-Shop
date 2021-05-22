@@ -1,6 +1,7 @@
 package com.example.projekt.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "products")
@@ -10,11 +11,13 @@ public class Product
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer productId;
-
+    @Size(min = 3, max = 255)
     private String name;
     private Integer brandId;
     private float price;
+    @Size(min = 3, max = 4096)
     private String description;
+    @Size(min = 3, max = 255)
     private String image;
     private Integer inStock;
     private Integer categoryId;

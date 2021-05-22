@@ -1,6 +1,7 @@
 package com.example.projekt.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,13 +13,13 @@ public class Address
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer addressId;
-
+    @Size(min = 3, max = 45)
     private String city;
-
+    @Size(min = 5, max = 45)
     private String postalCode;
-
+    @Size(min = 3, max = 45)
     private String street;
-
+    @Size(min = 1, max = 10)
     private String homeNumber;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "address")
