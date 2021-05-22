@@ -52,14 +52,6 @@ public class AppController
         return "index";
     }
 
-    @GetMapping("/register")
-    public String registerPage(Model model)
-    {
-        model.addAttribute("user", new User());
-        model.addAttribute("address", new Address());
-        return "register";
-    }
-
     @GetMapping("/contactUs")
     public String contactUs()
     {
