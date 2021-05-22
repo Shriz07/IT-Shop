@@ -110,22 +110,8 @@
             <tr th:each="product : ${products}">
                 <th scope="row" th:text="${product.productId}"></th>
                 <td th:text="${product.name}"></td>
-                <td style="vertical-align: middle">
-                    <select class="form-select text-white bg-dark" aria-label="Default select example" name="dropDownList1">
-                        <option selected th:text="${product.brand}">Select brand</option>
-                        <a style="width: 300px" th:each="brand : ${brands}">
-                            <option th:text="${brand.name}" th:value="${brand.brandId}">Default</option>
-                        </a>
-                    </select>
-                </td>
-                <td style="vertical-align: middle">
-                    <select class="form-select text-white bg-dark" aria-label="Default select example" name="dropDownList2">
-                        <option selected th:text="${product.category}">Select category</option>
-                        <a th:each="category : ${categories}">
-                            <option th:text="${category.name}" th:value="${category.categoryId}"></option>
-                        </a>
-                    </select>
-                </td>
+                <td th:text="${product.brand}"></td>
+                <td th:text="${product.category}"></td>
                 <td th:text="${product.price}"></td>
                 <td th:text="${product.inStock}"></td>
                 <td>
