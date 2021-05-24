@@ -32,10 +32,23 @@ public class BrandController
     @PostMapping("/addBrand")
     public String addBrand(Model model, Brand brand)
     {
-        if(brandService.addBrand(brand) == 0)
+        int status = brandService.addBrand(brand);
+        if(status != 0)
         {
-            String status = "Brand already exists";
-            model.addAttribute("status", status);
+            String message = "";
+            switch (status)
+            {
+                case 1:
+                    message = "Brand name is too short";
+                    break;
+                case 2:
+                    message = "Brand already exists";
+                    break;
+                default:
+                    message = "An error occurred";
+                    break;
+            }
+            model.addAttribute("status", message);
         }
         List<Brand> brands = brandService.findAll();
         model.addAttribute("brands", brands);

@@ -2,8 +2,10 @@ package com.example.projekt.service;
 import com.example.projekt.model.Category;
 import com.example.projekt.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,10 +31,18 @@ public class CategoryService implements ICategoryService
         try {
             categoryRepository.save(category);
         }
+        catch (ConstraintViolationException cve)
+        {
+            return 1;
+        }
+        catch (DataIntegrityViolationException dive)
+        {
+            return 2;
+        }
         catch (Exception e)
         {
-            return 0;
+            return 3;
         }
-        return 1;
+        return 0;
     }
 }

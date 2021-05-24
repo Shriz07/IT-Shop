@@ -28,10 +28,23 @@ public class CategoryController
     @PostMapping("/addCategory")
     public String addCategory(Model model, Category category)
     {
-        if(categoryService.addCategory(category) == 0)
+        int status = categoryService.addCategory(category);
+        if(status != 0)
         {
-            String status = "Category already exists";
-            model.addAttribute("status", status);
+            String message = "";
+            switch (status)
+            {
+                case 1:
+                    message = "Category name is too short";
+                    break;
+                case 2:
+                    message = "Category already exists";
+                    break;
+                default:
+                    message = "An error occurred";
+                    break;
+            }
+            model.addAttribute("status", message);
         }
         List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);

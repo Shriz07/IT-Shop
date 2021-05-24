@@ -13,7 +13,9 @@ public class Brand
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer brandId;
+
     @Size(min = 3, max = 45)
+    @Column(unique = true, nullable = false)
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "brand")
