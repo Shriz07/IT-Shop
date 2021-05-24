@@ -25,11 +25,13 @@
 <nav class="navbar navbar-expand-md navbar-custom fixed-top">
     <div class="container-fluid">
         <img src="/logo.png" alt="" class="logo-img">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu">
+            <span class="navbar-toggler-icon">
+                <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
+            </span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <div class="collapse navbar-collapse" id="main-menu">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
@@ -71,6 +73,9 @@
             </ul>
             <div sec:authorize="isAuthenticated()" style="color: white" class="me-2">
                 <a>Welcome [[${#request.userPrincipal.principal.fullName}]] !</a>
+            </div>
+            <div sec:authorize="isAuthenticated()" style="color: white" class="me-2">
+                <a> | Items in cart [[${itemsCount}]]</a>
             </div>
             <form class="d-flex" action="/search?search=name:*" onsubmit="location.href = this.action + this.searchText.value + '*'; return false">
                 <input class="form-control me-2" type="search" placeholder="Type ..." aria-label="Search" name="searchText">
