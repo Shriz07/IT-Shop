@@ -29,8 +29,9 @@ public class UserController
     {
         if( userService.findByEmail(user.getEmail()) != null)
         {
-            model.addAttribute("user", new User());
-            model.addAttribute("address", new Address());
+            user.setEmail("");
+            model.addAttribute("user", user);
+            model.addAttribute("address", address);
             model.addAttribute("status", "User with that email exists.");
             return "register";
         }
