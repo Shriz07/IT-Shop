@@ -26,11 +26,13 @@
 <nav class="navbar navbar-expand-md navbar-custom fixed-top">
     <div class="container-fluid">
         <img src="/logo.png" alt="" class="logo-img">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu">
+            <span class="navbar-toggler-icon">
+                <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
+            </span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <div class="collapse navbar-collapse" id="main-menu">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
@@ -88,9 +90,9 @@
 </nav>
 
 
-<div class="wrapper">
+<div class="wrapper" id="main">
 
-    <div>
+    <div id="sidebar-btn" style="position: absolute;">
         <button class="openbtn" onclick="openNav()">
             <i class="fas fa-bars"></i>
         </button>
@@ -110,56 +112,56 @@
     </div>
 
     <div class="content-wrapper mt-5">
-            <div th:unless="${#lists.isEmpty(products)}" class="container mb-5">
-                <div id="pageContent" class="row">
-                    <div class="prod col-md-4" th:each="product : ${products}">
-                        <div class="card mt-4">
-                            <div class="product-1 align-items-center p-2 text-center" th:onclick="'window.location.href=\'/productDetails?productId=' + ${product.productId} + '\''" style="cursor: pointer;">
-                                <div class="product-image">
-                                    <img th:src="@{${'/product_images/' + product.image}}" alt="" class="rounded" width="160" height="160">
-                                </div>
-                                <h5 th:text="${product.name}">Default</h5>
-                                <div class="mt-3 info">
-                                    <span class="text1 d-block" th:text="${product.brand}">Some text</span>
-                                </div>
-                                <div class="cost mt-3 text-dark">
-                                    <span th:text="'$' + ${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}">Default</span>
-                                </div>
+        <div th:unless="${#lists.isEmpty(products)}" class="container mb-5">
+            <div id="pageContent" class="row">
+                <div class="prod col-md-4" th:each="product : ${products}">
+                    <div class="card mt-4">
+                        <div class="product-1 align-items-center p-2 text-center" th:onclick="'window.location.href=\'/productDetails?productId=' + ${product.productId} + '\''" style="cursor: pointer;">
+                            <div class="product-image">
+                                <img th:src="@{${'/product_images/' + product.image}}" alt="" class="rounded" width="160" height="160">
                             </div>
-                            <div class="p-3 defcard text-center text-white mt-3 cursor">
-                                <span class="text-uppercase">Add to cart</span>
+                            <h5 th:text="${product.name}">Default</h5>
+                            <div class="mt-3 info">
+                                <span class="text1 d-block" th:text="${product.brand}">Some text</span>
                             </div>
+                            <div class="cost mt-3 text-dark">
+                                <span th:text="'$' + ${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}">Default</span>
+                            </div>
+                        </div>
+                        <div class="p-3 defcard text-center text-white mt-3 cursor">
+                            <span class="text-uppercase">Add to cart</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div th:unless="${not #lists.isEmpty(products)}" class="container text-center">
-                <div>
-                    <br>
-                    <br>
-                    <h3>No products were found.</h3>
-                    <br>
-                    <br>
-                </div>
+        </div>
+        <div th:unless="${not #lists.isEmpty(products)}" class="container text-center">
+            <div>
+                <br>
+                <br>
+                <h3>No products were found.</h3>
+                <br>
+                <br>
             </div>
-    </div>
-</div>
-<div class="d-flex" th:if = "${totalPages > 1}">
-    <ul class="pagination mx-auto justify-content-center">
-        <li class="page-item">
-            <a th:if="${currentPage > 1}" class="page-link" th:href="@{'/page/' + ${totalPages - 1}}">Previous</a>
-            <a th:unless="${currentPage > 1}" class="page-link">Previous</a>
-        </li>
-        <span th:each="i : ${#numbers.sequence(1, totalPages)}">
-            <li th:if="${currentPage != i}" class="page-item"><a class="page-link" th:href="@{'/page/' + ${i}}">[[${i}]]</a></li>
-            <li th:unless="${currentPage != i}" class="page-item active"><a class="page-link" th:href="@{'/page/' + ${i}}">[[${i}]]</a></li>
-        </span>
-        <li class="page-item">
-            <a th:if="${currentPage < totalPages}" class="page-link" th:href="@{'/page/' + ${currentPage + 1}}">Next</a>
-            <a th:unless="${currentPage < totalPages}" class="page-link" >Next</a>
-        </li>
+        </div>
+        <div th:if = "${totalPages > 1}">
+            <ul class="pagination mx-auto justify-content-center">
+                <li class="page-item">
+                    <a th:if="${currentPage > 1}" class="page-link" th:href="@{'/page/' + ${totalPages - 1}}">Previous</a>
+                    <a th:unless="${currentPage > 1}" class="page-link">Previous</a>
+                </li>
+                <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+                    <li th:if="${currentPage != i}" class="page-item"><a class="page-link" th:href="@{'/page/' + ${i}}">[[${i}]]</a></li>
+                    <li th:unless="${currentPage != i}" class="page-item active"><a class="page-link" th:href="@{'/page/' + ${i}}">[[${i}]]</a></li>
+                </span>
+                <li class="page-item">
+                    <a th:if="${currentPage < totalPages}" class="page-link" th:href="@{'/page/' + ${currentPage + 1}}">Next</a>
+                    <a th:unless="${currentPage < totalPages}" class="page-link" >Next</a>
+                </li>
 
-    </ul>
+            </ul>
+        </div>
+    </div>
 </div>
 
 
