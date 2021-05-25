@@ -131,22 +131,12 @@
                         <div class="table-responsive">
                             <table class="table table-sm table-borderless mb-0">
                                 <tbody>
-                                <tr>
-                                    <th class="pl-0 w-25" scope="row"><strong>Manufacturer</strong></th>
-                                    <td th:text="${product.brand}"></td>
-                                </tr>
-                                <tr>
-                                    <th class="pl-0 w-25" scope="row"><strong>Memory</strong></th>
-                                    <td>4GB</td>
-                                </tr>
-                                <tr>
-                                    <th class="pl-0 w-25" scope="row"><strong>Clock speed</strong></th>
-                                    <td>1515 MHz</td>
-                                </tr>
-                                <tr>
-                                    <th class="pl-0 w-25" scope="row"><strong>Warranty</strong></th>
-                                    <td>3 years</td>
-                                </tr>
+                                <th:block th:each="specification : ${specifications}">
+                                    <tr>
+                                        <th class="pl-0 w-25" scope="row"><strong th:text="${specification.specificationKey}"></strong></th>
+                                        <td th:text="${specification.specificationValue}"></td>
+                                    </tr>
+                                </th:block>
                                 </tbody>
                             </table>
                         </div>
