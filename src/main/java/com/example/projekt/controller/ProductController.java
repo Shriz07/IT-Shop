@@ -3,8 +3,6 @@ package com.example.projekt.controller;
 import com.example.projekt.model.Brand;
 import com.example.projekt.model.Category;
 import com.example.projekt.model.Product;
-import com.example.projekt.repository.BrandRepository;
-import com.example.projekt.repository.ProductRepository;
 import com.example.projekt.service.*;
 import com.sipios.springsearch.anotation.SearchSpec;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class ProductController
@@ -88,6 +85,7 @@ public class ProductController
         if(product == null)
             return "error";
         model.addAttribute("product", product);
+        model.addAttribute("specifications", product.getSpecifications());
         return "productDetails";
     }
 
