@@ -145,6 +145,11 @@ public class ProductController
 
             product.setImage(filename);
         }
+        else
+        {
+            Product prod = productService.findById(product.getProductId());
+            product.setImage(prod.getImage());
+        }
         productService.updateProduct(product, categoryId, brandId);
 
         response.sendRedirect("/manageProducts");
