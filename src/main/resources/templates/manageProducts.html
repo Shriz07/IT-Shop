@@ -108,6 +108,7 @@
                 <th scope="col">Price</th>
                 <th scope="col">In stock</th>
                 <th scope="col">Modify</th>
+                <th scope="col">Add specification</th>
                 <th scope="col">Delete</th>
             </tr>
             </thead>
@@ -122,6 +123,11 @@
                 <td>
                     <form method="get" th:action="@{/modifyProduct}">
                         <button class="btn btn-outline-warning" type="submit" th:name="productId" th:value="${product.productId}">Modify</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="get" th:action="@{/addSpecification}">
+                        <button class="btn btn-outline-success" type="submit" th:name="productId" th:value="${product.productId}">Add specification</button>
                     </form>
                 </td>
                 <td>
@@ -153,6 +159,7 @@
                 null,
                 { searchable: false },
                 { searchable: false },
+                null,
                 null,
                 null,
                 null,
