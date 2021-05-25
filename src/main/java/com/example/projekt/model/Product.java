@@ -2,6 +2,8 @@ package com.example.projekt.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -29,6 +31,9 @@ public class Product
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brandId", insertable = false, updatable = false)
     private Brand brand;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    private Set<Specification> specifications = new HashSet<>();
 
     public Integer getProductId() { return productId; }
 
@@ -71,4 +76,6 @@ public class Product
     public String getCategory() { return category.getName(); }
 
     public String getBrand() { return brand.getName(); }
+
+    public  Set<Specification> getSpecifications() { return specifications; }
 }
