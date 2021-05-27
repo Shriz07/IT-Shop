@@ -57,42 +57,44 @@
 
                     </div>
                     <div class="col-md-6">
-
-                        <h5 th:text="${product.name}"></h5>
-                        <p class="mb-2 text-muted text-uppercase small" th:text="${product.category}"></p>
-                        <h5 th:text="'$' + ${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}"><strong>$12.99</strong></h5>
-                        <p class="pt-1" th:text="${product.description}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
-                            error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
-                            officia quis dolore quos sapiente tempore alias.</p>
-                        <div class="table-responsive">
-                            <table class="table table-sm table-borderless mb-0">
-                                <tbody>
-                                <th:block th:each="specification : ${specifications}">
+                        <div class="productDetails">
+                            <h5 th:text="${product.name}"></h5>
+                            <p class="mb-2 text-muted text-uppercase small" th:text="${product.category}"></p>
+                            <h5 th:text="'$' + ${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}"><strong>$12.99</strong></h5>
+                            <p class="pt-1" th:text="${product.description}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
+                                error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
+                                officia quis dolore quos sapiente tempore alias.</p>
+                            <hr>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-borderless mb-0">
+                                    <tbody>
+                                    <th:block th:each="specification : ${specifications}">
+                                        <tr>
+                                            <th scope="row"><strong th:text="${specification.specificationKey}"></strong></th>
+                                            <td th:text="${specification.specificationValue}"></td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <hr>
+                            <div class="table-responsive mb-2">
+                                <table class="table table-sm table-borderless">
+                                    <tbody>
                                     <tr>
-                                        <th class="pl-0 w-25" scope="row"><strong th:text="${specification.specificationKey}"></strong></th>
-                                        <td th:text="${specification.specificationValue}"></td>
+                                        <td class="pl-0 pb-0 w-25">Quantity</td>
                                     </tr>
-                                </th:block>
-                                </tbody>
-                            </table>
+                                    <tr>
+                                        <td class="pl-0">
+                                            <div th:replace="quantity_controller :: quantity_controller(1, ${product.productId})">Quantity</div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-md mr-1 mb-2" id="buttonBuyNow">Buy now</button>
+                            <button type="button" class="btn btn-light btn-md mr-1 mb-2" id="buttonAddToCart"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
                         </div>
-                        <hr>
-                        <div class="table-responsive mb-2">
-                            <table class="table table-sm table-borderless">
-                                <tbody>
-                                <tr>
-                                    <td class="pl-0 pb-0 w-25">Quantity</td>
-                                </tr>
-                                <tr>
-                                    <td class="pl-0">
-                                        <div th:replace="quantity_controller :: quantity_controller(1, ${product.productId})">Quantity</div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <button type="button" class="btn btn-primary btn-md mr-1 mb-2" id="buttonBuyNow">Buy now</button>
-                        <button type="button" class="btn btn-light btn-md mr-1 mb-2" id="buttonAddToCart"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
                     </div>
                 </div>
 

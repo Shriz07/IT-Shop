@@ -228,6 +228,13 @@ body {
   box-shadow:0 0 15px rgba(0,0,0,0.8);
 }
 
+.productDetails{
+  padding: 15px;
+  background-color: rgba(77, 169, 219, 0.3);
+  border-radius: 20px;
+  box-shadow:0 0 15px rgba(0,0,0,0.8);
+}
+
 .inputName{
   text-align: right;
 }
