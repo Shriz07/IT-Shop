@@ -18,11 +18,15 @@ import java.util.List;
 @Controller
 public class UserController
 {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final AddressService addressService;
 
     @Autowired
-    private AddressService addressService;
+    public UserController(UserService userService, AddressService addressService)
+    {
+        this.userService = userService;
+        this.addressService = addressService;
+    }
 
     @PostMapping("/registerUser")
     public String registerUser(Model model, User user, Address address)

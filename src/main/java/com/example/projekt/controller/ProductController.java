@@ -27,14 +27,17 @@ public class ProductController
 {
     public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/product_images";
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
+    private final BrandService brandService;
+    private final CategoryService categoryService;
 
     @Autowired
-    private BrandService brandService;
-
-    @Autowired
-    private CategoryService categoryService;
+    public ProductController(ProductService productService, BrandService brandService, CategoryService categoryService)
+    {
+        this.productService = productService;
+        this.brandService = brandService;
+        this.categoryService = categoryService;
+    }
 
 
     @GetMapping("/search")

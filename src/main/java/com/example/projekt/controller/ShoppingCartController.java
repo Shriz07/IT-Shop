@@ -15,8 +15,13 @@ import java.util.List;
 @Controller
 public class ShoppingCartController
 {
+    private final CartItemService cartItemService;
+
     @Autowired
-    private CartItemService cartItemService;
+    public ShoppingCartController(CartItemService cartItemService)
+    {
+        this.cartItemService = cartItemService;
+    }
 
     @GetMapping("/shoppingCart")
     public String cart(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails)

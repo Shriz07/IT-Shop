@@ -19,26 +19,25 @@ import java.util.List;
 @Controller
 public class OrderController
 {
-    @Autowired
-    private PaymentMethodService paymentMethodService;
+    private final PaymentMethodService paymentMethodService;
+    private final PaymentService paymentService;
+    private final CartItemService cartItemService;
+    private final AddressService addressService;
+    private final OrderService orderService;
+    private final OrderStatusService orderStatusService;
+    private final OrderedProductService orderedProductService;
 
     @Autowired
-    private PaymentService paymentService;
-
-    @Autowired
-    private CartItemService cartItemService;
-
-    @Autowired
-    private AddressService addressService;
-
-    @Autowired
-    private OrderService orderService;
-
-    @Autowired
-    private OrderStatusService orderStatusService;
-
-    @Autowired
-    private OrderedProductService orderedProductService;
+    public OrderController(PaymentMethodService paymentMethodService, PaymentService paymentService, CartItemService cartItemService, AddressService addressService, OrderService orderService, OrderStatusService orderStatusService, OrderedProductService orderedProductService)
+    {
+        this.paymentMethodService = paymentMethodService;
+        this.paymentService = paymentService;
+        this.cartItemService = cartItemService;
+        this.addressService = addressService;
+        this.orderService = orderService;
+        this.orderStatusService = orderStatusService;
+        this.orderedProductService = orderedProductService;
+    }
 
     @GetMapping("/manageOrders")
     public String manageOrders(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails)

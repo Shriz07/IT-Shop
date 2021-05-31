@@ -1,34 +1,28 @@
 package com.example.projekt.controller;
 
-import com.example.projekt.details.CustomUserDetails;
 import com.example.projekt.model.*;
-import com.example.projekt.repository.AddressRepository;
-import com.example.projekt.repository.ProductRepository;
-import com.example.projekt.repository.UserRepository;
 import com.example.projekt.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @Controller
 public class AppController
 {
+    private final ProductService productService;
+
+    private final CategoryService categoryService;
 
     @Autowired
-    private ProductService productService;
-
-    @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
-    private CartItemService cartItemService;
+    public AppController(ProductService productService, CategoryService categoryService)
+    {
+        this.productService = productService;
+        this.categoryService = categoryService;
+    }
 
     @GetMapping("/")
     public String viewHomePage(Model model)

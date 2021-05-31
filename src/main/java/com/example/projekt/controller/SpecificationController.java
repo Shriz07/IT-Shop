@@ -13,8 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class SpecificationController
 {
+    private final SpecificationService specificationService;
+
     @Autowired
-    SpecificationService specificationService;
+    public SpecificationController(SpecificationService specificationService)
+    {
+        this.specificationService = specificationService;
+    }
 
     @GetMapping("/addSpecification")
     public String addSpecification(Model model, @RequestParam(value = "productId") Integer productId)
