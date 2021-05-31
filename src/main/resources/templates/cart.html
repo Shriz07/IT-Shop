@@ -51,7 +51,7 @@
                             </div>
                             <div class="p-1" style="font-size: 20px" th:replace="quantity_controller :: quantity_controller(${item.quantity}, ${item.product.productId})">Quantity</div>
                             <div class="p-1" style="font-size: 20px">
-                                <span>$[[${product.price}]]</span>
+                                <span>$[[${product.price}]] per 1 unit</span>
                             </div>
                             <div class="p-1" style="font-size: 20px">
                                 <span class="h4">Subtotal $ </span><span th:id="subtotal + ${product.productId}" class="h4 productSubtotal">[[${item.subtotal}]]</span>
